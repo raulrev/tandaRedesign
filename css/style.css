@@ -1,0 +1,213 @@
+body{
+    height: 100%;
+    overflow-x: hidden;
+    
+}
+
+.navbar {
+    margin-bottom: 0;
+    border-radius: 0;
+    background-color: #3498DB !important;
+    border-color:#3498DB;   
+
+}
+.nav.navbar-nav li a{
+    color: white;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+.navbar-header a{ 
+    color: white !important;
+}
+.navbar{
+  position: relative;
+  z-index: 99;
+}
+
+.checking {
+  margin-left: 300px;
+}
+/* Footer format */
+.footer{
+  bottom: 0;
+  position: relative;
+  height: 50px;
+  width: 100%;
+  color:white;
+  text-align: center;
+  background-color:#3498DB;
+  border-color: #3498DB;
+  padding: 10px;
+  z-index: 1;
+  
+}
+
+.employee-checkbox {
+  border: 2px solid #3498DB;
+  margin: 2px;
+  padding-left: 5pt;
+  width: 100%;
+}
+.employee-checkbox:hover{
+  background-color:#3498DB;
+  transition-timing-function: ease-in;
+  transition: .4s;
+}
+
+
+ol li{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+ol {
+    padding-left: 0;
+    margin-left: 0;
+}
+.btn span.glyphicon {    			
+	opacity: 0;				
+}
+.btn.active span.glyphicon {				
+	opacity: 1;				
+}
+
+#ref-tag1{
+  border-left:  solid #3498DB 6px;
+  border-bottom:  solid #3498DB 2px;
+}
+#ref-tag{
+  border-left:  solid #3498DB 6px;
+  border-bottom:  solid #3498DB 2px;
+  border-top: solid #3498DB 1px;
+}
+.tag-button{
+  width: 80%;
+  margin-bottom: .9em;
+}
+
+
+.nav-side-menu {
+    overflow: none;
+    position: fixed;
+    top:0;
+    height: 100%;
+    z-index: 2;
+    font-size: 1em;
+    font-weight: bold;
+    background-color: #3498DB;
+    width: 300px;
+    color: #e1ffff;
+    margin-left:-.8em;
+    padding-top: 60px;
+    
+  }
+
+  .nav-side-menu .toggle-btn {
+    display: none;
+  }
+  .nav-side-menu ul,
+  .nav-side-menu li {
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+    line-height: 35px;
+
+  }
+  .nav-side-menu ul :not(collapsed) .arrow:before,
+  .nav-side-menu li :not(collapsed) .arrow:before {
+    font-family: FontAwesome;
+    content: "\f078";
+    display: block;
+    padding-right: 1em;
+    float: right;
+  }
+  .nav-side-menu ul .active,
+  .nav-side-menu li .active {
+    border-left: 3px solid #e1e1e1;
+    background-color: #2390bc;
+  }
+  .nav-side-menu ul .sub-menu li.active,
+  .nav-side-menu li .sub-menu li.active {
+    color: #d19b3d;
+  }
+  .nav-side-menu ul .sub-menu li.active a,
+  .nav-side-menu li .sub-menu li.active a {
+    color: #d19b3d;
+  }
+  .nav-side-menu ul .sub-menu li,
+  .nav-side-menu li .sub-menu li {
+    background-color: #3498DB;
+    border: none;
+    line-height: 28px;
+    border-bottom: 1px solid #e1e1e1;
+    margin-left: 0px;
+    
+  }
+  .nav-side-menu ul .sub-menu li:hover,
+  .nav-side-menu li .sub-menu li:hover {
+    background-color: #68a7ca;
+  }
+  .nav-side-menu ul .sub-menu li:before,
+  .nav-side-menu li .sub-menu li:before {
+    font-family: FontAwesome;
+    content: "\f105";
+    display: inline-block;
+    padding-left: 10px;
+    padding-right: 10px;
+    
+  }
+  .nav-side-menu li {
+    padding-left: .8em;
+    border-left: 6px solid #e1e1e1;
+    border-bottom: 1px solid #e1e1e1;
+  }
+  .nav-side-menu li a {
+    text-decoration: none;
+    color: #e1ffff;
+  }
+  .nav-side-menu li a i {
+    padding-left: 10px;
+    width: 20px;
+    padding-right: 20px;
+  }
+  .nav-side-menu li:hover {
+    border-left: 3px solid #e1e1e1;
+    background-color: #68a7ca;
+  }
+  @media (max-width: 767px) {
+    .nav-side-menu {
+      position: relative;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    .nav-side-menu .toggle-btn {
+      display: block;
+      cursor: pointer;
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      z-index: 10 !important;
+      padding: 3px;
+      overflow: hidden;
+      color: #e1e1e1;
+      width: 40px;
+      text-align: center;
+    }
+    
+  
+  }
+  @media (min-width: 767px) {
+    .nav-side-menu .menu-list .menu-content {
+      display: block;
+    }
+    
+  }
+
+#profileCard {
+  border: solid 2px #3498DB;
+  padding: .1em;
+  margin: .1em;
+}
+
+
+  

@@ -1,0 +1,286 @@
+
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <title> Tanda Bulk Tagging Tool </title>
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+        <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+        <!-- CSS Stylesheets -->
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <!-- JavaScript Methods -->
+        
+        
+        <style>
+        [ng\:cloak], [ng-cloak], .ng-cloak{
+            display: none;
+        }
+        </style>
+    </head>
+
+    <body ng-app="tandaApp" ng-cloak  ng-controller= "ctrl1">
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">        
+                <!-- Specify elements in the header when collapse happens -->      
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#tanda-nav-menu">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>      
+                    </button>        
+                    <a class="navbar-brand" href="#"><span class="fa fa-qq fa-1x"></span> Tanda  </a>
+                </div>
+                <!-- Elements to be hidden when collapse -->
+                <div class="collapse navbar-collapse" id="tanda-nav-menu">
+                    <ul class="nav navbar-nav" >
+                        <li class=""><a href="#">Dashboard</a></li>
+                        <li class="active"><a href="#">Staff</a></li>
+                        <li class=""><a href="#"> Rosters </a></li>
+                        <li class=""><a href="#"> Timesheets </a></li>                        
+                        <li class=""><a href="#"> Leave </a></li>                        
+                        <li class=""><a href="#"> Payroll </a></li>                        
+                        <li class=""><a href="#"> Reports </a></li>                        
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#"><span class="glyphicon glyphicon-user"></span></a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-question-sign"></span> </a></li>
+                    </ul>
+                </div>                 
+            </div>
+        </nav>
+        <div class="container-fluid" id="check" >                
+            <div class="row content">
+                <div class="col-xs-1 nav-side-menu">
+                    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+                        <h4>Refine Search</h4>
+                        <div class="menu-list">                    
+                            <ul id="menu-content" class="menu-content collapse out">
+                                <li>
+                                    <a href="#">
+                                    <i class="fa fa-dashboard fa-lg"></i> Tag Staff Members 
+                                    </a>
+                                </li>
+                
+                                <li  data-toggle="collapse" data-target="#deptNames" class="collapsed">
+                                    <a href="#" ><i class="fa fa-gift fa-lg"></i> Departments <span class="arrow"></span></a>
+                                </li>
+                                <ul class="sub-menu collapse" id="deptNames">
+                                    <li ng-repeat="dept in departments">
+                                        <a href="#" id="{{dept}}" ng-model="refDepts" ng-click="refineByDept($event)">{{dept}}</a></li>
+                                </ul>
+                
+                                <li data-toggle="collapse" data-target="#StaffTags" class="collapsed">
+                                    <a href="#"><i class="fa fa-globe fa-lg"></i> Tags <span class="arrow"></span></a>
+                                </li>  
+                                <ul class="sub-menu collapse" id="StaffTags">
+                                    <li ng-repeat="tg in tags">
+                                        <a href="#" id="{{tg}}" ng-model="refTags" ng-click="refineByTags($event)">{{tg}}</a></li>
+                                    
+                                </ul>
+                                <li><a href="#"><i class="fa fa-users fa-lg"></i> Staff </a></li>
+                            </ul>
+                        </div>
+                    </div>
+                
+                <div class="checking col-xs-10" >         
+                    <div id="staffList">
+                        <div class="row col-xs-12">
+                                <h3 class="ListTitle"> List of employees </h3>
+                        <div class="col-xs-8"> 
+                            
+                            <p>Select the staff members to tag: </p>
+                        </div>
+                        <div class="col-xs-2 pull-down">
+                            <a ng-click="toggleSelected()">{{selectText}} </a>
+                        </div>
+                    </div>
+                       
+                        <div class="row col-xs-9" >
+                            <ol>
+                                <li class="col-xs-3" ng-repeat="employee in staff" >     
+                                    <div id="profileCard" class="employee-checkbox col-xs-12">
+                                        
+                                        <div class="col-xs-3">
+                                            <span class="fas fa-user-secret fa-2x"></span>
+                                            
+                                        </div>
+                                        <div class="col-xs-9">
+                                            <div class="row col-xs-11">
+                                                <label style="font-size: 11px; margin-top:7px;" for="{{'employee.fName-' + $index }}">
+                                                    {{employee.fName + " " + employee.lName }}
+                                                </label>
+                                                
+                                            </div>
+
+                                            <div class="col-xs-1 pull-right">
+                                                <input ng-init='checkStatus=false' ng-model='checkStatus' 
+                                                ng-click="checkId($index, checkStatus)" id="{{'employee.fName-' + $index }}" 
+                                                ng-checked="employee.checked" name="$index" type="checkbox" >
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <label style="font-size: 10px; padding:2px;" for="{{'employee.fName-' + $index }}">
+                                                Departments: {{employee.departments}} <br>
+                                                Tags: {{employee.tags}}
+                                            </label>
+                                        </div>
+
+                                        
+                                    </div>
+                                </li>
+                            </ol> 
+                            
+                            <div class="search row col-xs-12"  ng-model="refDepts">
+                                <h3> {{titlea}}  </h3>
+                                <div id="{{department}}" >
+                                    <ol>
+                                        <li class="col-xs-3" ng-repeat="employee in check">     
+                                            <div class="employee-checkbox" >
+                                                <label  for="{{'employee.fName-' + $index }}">
+                                                    <span class="glyphicon glyphicon-user"></span>
+                                                    {{employee.fName + " " + employee.lName }}
+                                                    <input ng-init='checkStatus=false' ng-model='checkStatus' 
+                                                ng-click="checkId($index, checkStatus)" id="{{'employee.fName-' + $index }}" 
+                                                ng-checked="employee.checked" type="checkbox" >
+                                              
+                                                </label>
+                                                
+                                            </div>
+        
+                                        </li>
+                                    </ol> 
+                                    
+                                </div>
+                            </div>
+
+                            <div class="row col-xs-12"  ng-model="refTags">
+                                <h3> {{titlet}}  </h3>
+                                <div id="{{tags}}" >
+                                    <ol>
+                                        <li class="col-xs-3" ng-repeat="employee in checkT">     
+                                            <div class="employee-checkbox">
+                                                <span class="glyphicon glyphicon-user"></span>
+                                                <label for="{{'employee.fName-' + $index }}">
+                                                        {{employee.fName + " " + employee.lName }}
+                                                </label>
+                                                <input ng-init='checkStatus=false' ng-model='checkStatus' 
+                                                ng-click="checkId($index, checkStatus)" id="{{'employee.fName-' + $index }}" 
+                                                ng-checked="employee.checked" type="checkbox" >
+                                            </div>
+        
+                                        </li>
+                                    </ol> 
+                                    
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <!--START OF STAFF STAG SIDE MENU -->
+                        <div class="tag-by-container col-xs-3">
+                            <h4>TAG STAFF BY</h4>
+                            <div class="departments-container row col-xs-12" >
+                                <div id= "filterDeptButtons" class="col-xs-12">
+                                    <div class="refine-label panel-heading" id="ref-tag">
+                                        <h4>
+                                        <a data-toggle="collapse" href="#collapseDeptPanel">
+                                            Departments                                    
+                                            <i class="pull-right indicator fa fa-caret-down" aria-hidden="true"></i>
+                                        </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseDeptPanel" class="panel-collapse collapse in" >
+                                        <div class="col-xs-12" ng-repeat="department in departments">
+                                            <input ng-init='checkDepartmentStatus=false' ng-model='checkDepartmentStatus' 
+                                            ng-click="checkDeptsSelected(department, checkDepartmentStatus)" ng-checked="department.checked" id="{{department}}" 
+                                            type="checkbox" >
+                                            <label for="{{'department'}}">
+                                                {{department}}
+                                            </label>
+                                        </div>
+                                        <div class="row col-xs-12 text-center">
+                                            <input class="tag-button-dep" id="mymodal" type="button" value="Assign Department" 
+                                            ng-click="addDepartmentTag()" data-toggle="modal" data-target="#myModal"> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="tag-container row col-xs-12">
+                                <div id= "filterTagButtons" class="col-xs-12">
+                                    <div class="refine-label panel-heading" id="ref-tag" >
+                                        <h4>
+                                        <a data-toggle="collapse" href="#collapseTagsPanel">
+                                            Tags 
+                                            <i class="pull-right indicator fa fa-caret-down" aria-hidden="true"></i>
+                                        </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseTagsPanel" class="panel-collapse collapse in" >
+                                        <div class="col-xs-12" ng-repeat="tag in tags">
+                                            <input ng-init='checkTagStatus=false' ng-model='checkTagStatus' 
+                                            ng-click="checkTagsSelected(tag, checkTagStatus)" id="{{tag}}" type="checkbox" >
+                                            <label for="{{'tag'}}">
+                                                {{tag}}
+                                            </label>
+                                        </div>
+                                        <div class="row col-xs-12 text-center">
+                                            <input class="tag-button" type="button" id="mymodal" data-toggle="modal" data-target="#myModal"
+                                             value="Assign Tag" ng-click="addTags()"> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>  <!-- END OF STAFF TAG SIDE MENU --> 
+
+
+                        <!-- Start of modal -->
+                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" ng-repeat="x in temp_modal_users">
+                            <div class="modal-dialog" role="document" >
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel"> Success </h4>
+                                    </div>
+                                    The following users were modified:
+                                    <div class="modal-body" ng-repeat="x in temp_modal_users" >
+                                         {{x}}
+                                    </div>
+                                    
+                                    <div class="modal-footer">
+                                        <button ng-click="wipeDepts(); wipeTags(); WipeUsers(); uncheckAll(); uncheckTags();" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!--End of modal -->
+                        
+                    </div>
+                </div>
+            </div>  <!-- row content-->
+        </div> <!-- container fluid-->
+        
+     <!-- AngularJS library -->
+     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+     <!-- Load the JS Module -->
+     <script src="js/appTanda.js"></script>    
+    </body>
+
+    <footer>
+        <nav class="footer">
+            <div class="container">
+                <small>2018 - Bulk Tagging Tool Redesign </small>
+            </div>
+        </nav>
+
+    </footer>
+
+</html>
